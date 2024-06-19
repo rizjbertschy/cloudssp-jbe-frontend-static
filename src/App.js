@@ -17,17 +17,6 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
           <button onClick={()=>getWeather()}>get Weather</button>
           <button onClick={()=>this.setState({weather: JSON.parse(localStorage.getItem("weather"))})}>aktualisieren</button>
           {this.state.weather.length > 0 && <>
