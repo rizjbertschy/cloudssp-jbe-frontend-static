@@ -1,14 +1,31 @@
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import React from "react";
+import Forecast from "./Forecast";
 
+const getData = async () => {
+    const apiUrl = 'https://cloudssp-jbe-backend.azurewebsites.net/weatherforecast';
 
-export function getWeather() {
-  get("weatherforecast")
+    const res = await axios.get(apiUrl);
+    return res.data;
 }
 
-function get(url) {
-    axios.get(`https://cloudssp-jbe-backend.azurewebsites.net/` + url)
-      .then(res => {
-        const weatherData = res.data;
-        localStorage.setItem("weather", JSON.stringify(weatherData));
-      });
+const Data = () => {
+    const { data, status } = useQuery('mydata', getData);
+    console.log(data);
+
+    return (
+        <div>
+            <h2>Data</h2>
+            { status === 'error' && ( <div>Error getting Data</div>)}
+            { status === 'loading' && ( <div>Loading Data</div>)}
+            { status === 'success' && (
+               <div>
+                { data.map(forecast => <Forecast key={forecast.date} forecast={forecast} />)}
+               </div> 
+            )};
+        </div>
+    )
 }
+
+export default Data;
