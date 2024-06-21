@@ -1,6 +1,8 @@
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 import { getWeather } from './Api';
+import { GetWeatherTest } from './ApiTest';
+import Counter from './Counter'
 import React from 'react';
 
 class App extends React.Component {
@@ -17,6 +19,7 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
+          <Counter />
           <button onClick={()=>getWeather()}>get Weather</button>
           <button onClick={()=>this.setState({weather: JSON.parse(localStorage.getItem("weather"))})}>aktualisieren</button>
           {this.state.weather.length > 0 && <>
@@ -41,6 +44,7 @@ class App extends React.Component {
             </tr>
           </table>
         </>}
+        <button onClick={()=>GetWeatherTest()}>get Weather Console</button>
         </header>
         
       </div>
